@@ -47,8 +47,9 @@ if (-not (Test-Path Env:AZP_URL)) {
   {
     Write-Host "3. Configuring Azure Pipelines agent..." -ForegroundColor Cyan
 
+    $hostname = hostname
     .\config.cmd --unattended `
-      --agent "$(if ((Test-Path Env:AZP_AGENT_NAME) -and (Test-Path Env:HOST)) { "${Env:AZP_AGENT_NAME}-$Env:HOST" } else { hostname })" `
+      --agent "$(if ((Test-Path Env:AZP_AGENT_NAME) -and (Test-Path Env:HOST)) { "${Env:AZP_AGENT_NAME}-$Env:HOST-$hostname" } else { hostname })" `
       --url "$(${Env:AZP_URL})" `
       --auth PAT `
       --token "$(Get-Content ${Env:AZP_TOKEN_FILE})" `
