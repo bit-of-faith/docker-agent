@@ -38,7 +38,7 @@ $testpath = "${dir}\SonarQube.Analysis.xml" ;$path=Get-ChildItem $testpath -Recu
 $path.fullname | ForEach-Object {(Get-Content $_ -Raw).Replace($sonarUrl, "SONAR_URL")| Set-Content $_}
 $path.fullname | ForEach-Object {(Get-Content $_ -Raw).Replace($sonarToken, "SONAR_TOKEN")| Set-Content $_}
 
-if (!([Environment]::GetEnvironmentVariable("Path", [EnvironmentVariableTarget]::Machine) -like "`*C:\${target}*")) { 
+if (!([Environment]::GetEnvironmentVariable("Path", [EnvironmentVariableTarget]::Machine) -like "`C:\${target};")) { 
     [Environment]::SetEnvironmentVariable(
     "Path", 
     [Environment]::GetEnvironmentVariable("Path", [EnvironmentVariableTarget]::Machine) + "C:\${target};", 
